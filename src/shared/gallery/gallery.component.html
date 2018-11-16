@@ -1,0 +1,80 @@
+<dx-popup
+  #popup
+  id="popup"
+  [maxWidth]="maxWidthPercent + '%'"
+  [maxHeight]="maxHeightPercent + '%'"
+  [minWidth]="minWidth"
+  [minHeight]="minHeight"
+  [height]="height"
+  [width]="width"
+  [animation]="{show: {type: 'fade'}}"
+  [showTitle]="false"
+  [title]="false"
+  [dragEnabled]="true"
+  [closeOnOutsideClick]="true"
+  [shading]="true"
+  [resizeEnabled]="false"
+  [showCloseButton]="true"
+  [(visible)]="popupVisible"
+>
+  <div class="p-top-space" *dxTemplate="let data of 'content'">
+    <div class="popup-close">
+      <app-data-line svgIcon="window-close" (iconClick)="close()"></app-data-line>
+    </div>
+    <app-svg-icon
+      #prevButton
+      *ngIf="isMultipe"
+      class="gallery-button-prev"
+      (click)="onPrevImage($event)"
+      [classCustom]="currentIndex === 0 ? 'disabled' : ''"
+      icon="arrow-prev"
+    ></app-svg-icon>
+    <dx-gallery
+        #gallery
+        id="gallery"
+        [dataSource]="dataSource"
+        width="calc(100% - {{ isMultipe ? '120px' : '0px' }})"
+        height="100%"
+        [selectedIndex]="currentIndex"
+        [showIndicator]="false"
+        [loop]="false"
+        [(visible)]="galleryVisible"
+        (onSelectionChanged)="onSelectionChanged($event)"
+    >
+      <div *dxTemplate="let galleryItem of 'item'">
+        <a
+          class="gallery-cursor-field"
+        >
+          <img
+            appGalleryCursor
+            [sizeArea]="sizeArea"
+            (mousemove)="onZoomImage($event)"
+            (mouseenter)="onEnterZoom($event, galleryItem)"
+            (mouseleave)="onLeaveZoom($event)"
+            class="gallery-image"
+            src="{{galleryItem}}"
+          />
+        </a>
+      </div>
+    </dx-gallery>
+    <app-svg-icon
+      #nextButton
+      *ngIf="isMultipe"
+      class="gallery-button-next"
+      (click)="onNextImage($event)"
+      [classCustom]="currentIndex === (dataSource.length - 1) ? 'disabled' : ''"
+      icon="arrow-next"
+    ></app-svg-icon>
+    <div
+      class="gallery-zoom"
+      appGalleryZoom
+      [hidden]="!isShowZoom"
+      [backgroundSrc]="currentImage"
+      [sizeArea]="sizeArea"
+      [xPos]="xPos"
+      [yPos]="yPos"
+      [xMax]="xMax"
+      [yMax]="yMax"
+    ></div>
+  </div>
+</dx-popup>

@@ -1,0 +1,136 @@
+.data-grid--design-styled {
+    &.selectable {
+        ::ng-deep .dx-datagrid .dx-datagrid-content .dx-data-row:hover>td {
+            background-color: @color-background-row--hover;
+        }
+    }
+    &.with-master-datail {
+        ::ng-deep .dx-datagrid {
+            margin-left: -@grid-shadow-space;
+            margin-right: -@grid-shadow-space;
+            margin-top: -@grid-shadow-space;
+            background: @color-background-block;
+            & .expander {
+                height: 20px;
+            }
+            .dx-datagrid-headers {
+                margin-bottom: -@grid-shadow-space;
+            }
+            .dx-datagrid-table {
+                margin-top: @grid-shadow-space;
+            }
+            .dx-datagrid-content {
+                padding: 0 @grid-shadow-space;
+                box-sizing: border-box;
+            }
+            .dx-data-row {
+                &.open-master-datail {
+                    box-shadow: 2px 2px 2px @color-box-shadow,
+                                -2px 2px 2px @color-box-shadow,
+                                0px 0px @grid-shadow-space @color-box-shadow,
+                                0px 0px 1px @color-box-shadow;
+
+                    & + .dx-master-detail-row td {
+                        box-shadow: -2px 1px 2px @color-box-shadow,
+                                    2px 2px 2px @color-box-shadow;
+                    }
+                }
+            }
+            .dx-datagrid-rowsview.dx-datagrid-nowrap {
+                padding-bottom: @grid-shadow-space;
+                .dx-datagrid-table {
+                    margin-bottom: @grid-shadow-space;
+                }
+            }
+        }
+    }
+    &.auto-width-column {
+        ::ng-deep .dx-datagrid {
+            .dx-scrollable-content {
+                width: 100%;
+                .dx-datagrid-content {
+                    width: 100%;
+                    .dx-datagrid-table-fixed {
+                        width: auto;
+                        min-width: 100%;
+                    }
+                }
+            }
+            .dx-datagrid-table-fixed {
+                width: auto;
+                min-width: 100%;
+            }
+        }
+    }
+}
+
+.dx-overlay-modal.dx-popup-wrapper {
+    &.dialog-position-center {
+        display: grid;
+        justify-items: center;
+        align-items: baseline;
+        overflow-y: auto;
+        &>div.dx-overlay-content {
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            height: 100% !important;
+            display: grid;
+            align-items: center;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            .dx-popup-content {
+                border-radius: @border-radius-dialog;
+                position: relative;
+                width: 100%;
+                margin: @space-l 0;
+                background-color: white;
+                .popup-body {
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+.spinner {
+    position: relative;
+    &.spinner-active {
+        &:before {
+            content: attr(alt);
+            background-image: url(./../app/core/view/icons/svg-icon/icons/loading.svg);
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(50% - 50px);
+            background-repeat: no-repeat;
+            z-index: 999;
+            background-size: 100%;
+            display: grid;
+            align-items: end;
+            text-align: center;
+            font-size: @size-header-3;
+            font-weight: bold;
+        }
+        &:after {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: @color-background-loading;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.2s, ease-in-out 0.2s;
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,12 @@
+<div
+  class="select-grid"
+  #gridContainer
+>
+  <div *ngFor="let item of data"><span
+    class="dotted cursor {{ (multiple && value.indexOf(item) !== -1) || value === item ? 'selected' : '' }}"
+    (click)="onClick(item)"
+  >{{ item[keyName] }}</span></div>
+</div>
+<div class="validation-container">
+  <ng-content></ng-content>
+</div>

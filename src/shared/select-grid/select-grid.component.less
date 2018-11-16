@@ -1,0 +1,19 @@
+@import '../../../../less/_variables.less';
+@import '../../../../less/_mixins.less';
+:host {
+    display: block;
+    overflow: hidden;
+    .select-grid {
+        display: grid;
+        grid-auto-flow: column;
+        & span {
+            white-space: nowrap;
+        }
+    }
+    .validation-container {
+        position: absolute;
+        font-size: @size-text-1;
+        color: @color-alert;
+        margin-top: @space-s;
+    }
+}
